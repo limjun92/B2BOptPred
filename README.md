@@ -1,6 +1,6 @@
 # B2BOptPred
 
-## ue
+## Vue
 
 * axios
 
