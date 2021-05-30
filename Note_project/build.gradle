@@ -1,0 +1,115 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//spring boot default lib
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1'
+	
+	// Monitoring and managing tool
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	
+	//anotation lib
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	
+	// 스프링 부트 개발 툴(클래스 자동 리로더 등)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	
+	//liteweghit db
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.hsqldb:hsqldb'
+	
+	//test lib
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	
+	// 테스트 프레임워크(Spock) 라이브러리
+//	testCompile 'org.springframework.boot:spring-boot-starter-test'
+//	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-3'
+//	testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4-rc-3'
+//	testRuntime 'cglib:cglib-nodep:3.2.4'
+	
+	// 추가 라이브러리 시작 ...
+	
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
+	compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.2'
+	//python 관련?
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-exec
+	implementation group: 'org.apache.commons', name: 'commons-exec', version: '1.3'
+	
+	//유용 라이브러리 모음
+	implementation 'org.apache.commons:commons-lang3:3.6'
+
+	// 분산 트랙잭션 라이브러리
+	//implementation 'org.springframework.boot:spring-boot-starter-jta-atomikos'
+
+	// 서블릿 JSP 라이브러리
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'javax.servlet:jstl'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	
+	// Database 초기화 및 JPA 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+
+	// Apache Common 라이브러리
+	implementation 'org.apache.commons:commons-collections4:4.0'
+	
+	// 테스트 프레임워크(Spock) 적용 스크립트(Groovy) 라이브러리
+	implementation 'org.codehaus.groovy:groovy-all:2.5.8'
+	
+	// Log4j2 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+//	compile("org.apache.logging.log4j:log4j-core:2.7")
+//	compile("org.apache.logging.log4j:log4j-slf4j-impl:2.7")
+	implementation'com.lmax:disruptor:3.3.6'
+
+	// Log4j2 충돌 제외 라이브러리
+	configurations {
+	    all {
+	        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	    }
+	}
+
+}
+
+test {
+	useJUnitPlatform()
+}
+
+war {
+	baseName = 'Starter'
+	version = '0.0.1-SNAPSHOT'
+}
+
+task local {
+	bootRun {
+		systemProperty("spring.profiles.active", "local")
+	}
+}
+
