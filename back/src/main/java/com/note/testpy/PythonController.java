@@ -21,14 +21,14 @@ import java.io.IOException;
 public class PythonController {
 	
 	@GetMapping("/print")
-	public ResponseEntity<?> getUser() {
+	public ResponseEntity<?> pythonPrint() {
 		String re = "";
 		System.out.println("=============================");
 		System.out.println("Python Call");
         String[] command = new String[4];
         command[0] = "python";
         //command[1] = "\\workspace\\java-call-python\\src\\main\\resources\\test.py";
-        command[1] = "/Users/limju/OneDrive/바탕 화면/신입사원역량강화프로젝트/test.py";
+        command[1] = "/Users/limju/OneDrive/바탕 화면/신입사원역량강화 프로젝트/B2BOptPred/test.py";
         ;
         command[2] = "10";
         command[3] = "20";
