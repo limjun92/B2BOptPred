@@ -27,9 +27,8 @@ public class PythonController {
 		System.out.println("Python Call");
         String[] command = new String[4];
         command[0] = "python";
-        //command[1] = "\\workspace\\java-call-python\\src\\main\\resources\\test.py";
-        command[1] = "/Users/limju/OneDrive/바탕 화면/신입사원역량강화프로젝트/test.py";
-        ;
+        //command[1] = "/Users/limju/OneDrive/바탕 화면/신입사원역량강화프로젝트/test.py";
+        command[1] = "/Users/limju/OneDrive/바탕 화면/신입사원역량강화프로젝트/test-DESKTOP-9Q38GK1.py";
         command[2] = "10";
         command[3] = "20";
         try {
