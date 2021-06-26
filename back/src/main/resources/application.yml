@@ -12,7 +12,10 @@ server:
 
 # Spring 환경 설정
 spring:
-
+  servlet:
+    multipart:
+        max-file-size: 20MB
+        max-request-size: 20MB
 #  # 1개 DataSource 설정
 #  datasource:
 #    h2:

@@ -1,6 +1,5 @@
 package com.note.user;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 
@@ -22,11 +21,24 @@ public class UserVo {
 	private Timestamp modiDate;
 	
 	public UserVo() {
-	
+		System.out.println("uservo");
 	}
 	
-	public UserVo(int usersNo){
-		setUsersNo(usersNo);
+	public UserVo(String usersId, String usersPassword, String usersTel, String usersNickname, String usersName,
+			String usersEmail) {
+		this.usersId = usersId;
+		this.usersPassword = usersPassword;
+		this.usersTel = usersTel;
+		this.usersNickname = usersNickname;
+		this.usersName = usersName;
+		this.usersEmail = usersEmail;
+	}
+
+	@Override
+	public String toString() {
+		return "UserVo [usersNo=" + usersNo + ", usersId=" + usersId + ", usersPassword=" + usersPassword + ", usersTel="
+				+ usersTel + ", usersNickname=" + usersNickname + ", usersName=" + usersName
+				+ ", usersEmail=" + usersEmail + "]";
 	}
 	
 }

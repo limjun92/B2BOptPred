@@ -18,11 +18,6 @@ warnings.simplefilter("ignore")
 os.chdir('C:\oppty')
 
 
-# In[3]:
-
-
-pwd
-
 
 # In[4]:
 

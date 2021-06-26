@@ -40,9 +40,7 @@ public class PythonController {
 	}
 	
 	public static String execPython(String[] command) throws IOException, InterruptedException {
-		System.out.println("??");
 		CommandLine commandLine = CommandLine.parse(command[0]);
-	    System.out.println("=============");
 	    for (int i = 1, n = command.length; i < n; i++) {
 	        commandLine.addArgument(command[i]);
 	    }

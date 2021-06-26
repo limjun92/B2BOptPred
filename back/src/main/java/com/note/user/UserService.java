@@ -15,4 +15,8 @@ public class UserService {
 	public List<UserVo> selectUserList() {
 		return user.selectUserList();
 	}
+	
+	public int signUp(UserVo uservo) {
+		return user.signUp(uservo);
+	}
 }

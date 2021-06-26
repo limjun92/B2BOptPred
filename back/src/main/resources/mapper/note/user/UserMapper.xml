@@ -7,4 +7,11 @@
 		select * from users
 	</select>
 	
+	<insert id="signUp" parameterType="User">
+        insert into users (usersId,usersPassword,usersTel,usersNickname,
+        usersName,usersEmail)
+        values (#{usersId}, #{usersPassword}, #{usersTel},
+         #{usersNickname},  #{usersName}, #{usersEmail})
+     </insert>
+	
 </mapper>
