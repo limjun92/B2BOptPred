@@ -18,7 +18,6 @@ warnings.simplefilter("ignore")
 os.chdir('C:\oppty')
 
 
-
 # In[4]:
 
 
@@ -29,6 +28,16 @@ df = pd.read_csv('oppty.csv', encoding='cp949')
 
 
 df.head(3)
+
+# In[5]:
+
+
+df['X_STATUS_CD'].value_counts()
+
+# In[5]:
+
+
+df.info()
 
 
 # In[6]:
@@ -56,17 +65,30 @@ df.head(5)
 df['X_STATUS_CD'].value_counts()
 
 
+# In[9]:
+
+
+df['X_TEXT'].value_counts()
+
+
+
 # In[10]:
 
 
 odf = df.loc[df['X_STATUS_CD'].isin(['Win', 'Loss'])]
 
+# In[10]:
+
+
+odf['X_STATUS_CD'].value_counts()
 
 # In[11]:
 
-
 odf['Result'] = odf['X_STATUS_CD'].apply(lambda x:  1 if x=='Win' else 0)
 
+# In[11]:
+
+odf.head(5)
 
 # In[12]:
 
@@ -167,6 +189,11 @@ train_x.head(3)
 train_x = pd.get_dummies(train_x)
 
 
+# In[27]:
+
+
+train_x.head()
+
 # In[28]:
 
 
@@ -266,7 +293,6 @@ from sklearn import preprocessing
 
 
 scaler = preprocessing.StandardScaler().fit(train_x)
-
 
 # In[44]:
 

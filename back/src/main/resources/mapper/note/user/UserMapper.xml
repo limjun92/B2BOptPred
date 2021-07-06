@@ -8,8 +8,8 @@
 	</select>
 	
 	<insert id="signUp" parameterType="User">
-        insert into users (usersId,usersPassword,usersTel,usersNickname,
-        usersName,usersEmail)
+        insert into users (users_id,users_password,users_tel,users_nickname,
+        users_name,users_email)
         values (#{usersId}, #{usersPassword}, #{usersTel},
          #{usersNickname},  #{usersName}, #{usersEmail})
      </insert>
