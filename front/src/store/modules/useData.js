@@ -3,7 +3,8 @@ import axios from 'axios';
 let api_url = process.env.VUE_APP_APIURL + "/oppty";
 
 const state = {
-    data: [],
+    data: '',
+    opptyList: [],
 }; 
 
 const actions = {
@@ -14,18 +15,30 @@ const actions = {
             .then(item => (context.commit('setData',item)))
             .catch(error => console.error(error));
     },
+    loadOpptyList(context){
+        axios.get(`${api_url}/getAll`)
+            .then(res => res.data)
+            .then(items => (context.commit('setOpptyList',items)))
+            .catch(error => console.error(error));
+    },
 };
 
 const getters = {
     getData(state){
         return state.data;
     },
+    getOppty(state){
+        return state.opptyList;
+    }
 }; //getters
 
 const mutations = {
     setData(state, items){
         state.data = items;
     },
+    setOpptyList(state, items){
+        state.opptyList = items;
+    }
 };
 
 export default {

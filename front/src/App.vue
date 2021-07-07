@@ -4,23 +4,23 @@
 
     <div>==========================================================</div>
 
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/>
     <fileUploadTest2/>
-    <showTable/>
+    <showTable/> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import fileUploadTest2 from './components/fileUploadTest2.vue'
-import showTable from './components/showTable.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+// import fileUploadTest2 from './components/fileUploadTest2.vue'
+// import showTable from './components/showTable.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    fileUploadTest2,
-    showTable,
+    // HelloWorld,
+    // fileUploadTest2,
+    // showTable,
   }
 }
 </script>

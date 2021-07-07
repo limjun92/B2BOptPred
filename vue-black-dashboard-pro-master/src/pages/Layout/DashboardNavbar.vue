@@ -19,9 +19,10 @@
       </div>
       <a class="navbar-brand" href="#pablo">{{ routeName }}</a>
     </div>
-
+  
     <ul class="navbar-nav" :class="$rtl.isRTL ? 'mr-auto' : 'ml-auto'">
-      <div class="search-bar input-group" @click="searchModalVisible = true">
+      <!-- ================================================================ --> 
+      <div class="search-bar input-group" @click="loginModalVisible = true">
         <!--
           <input type="text" class="form-control" placeholder="Search...">
           <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div>
@@ -32,26 +33,49 @@
           data-toggle="modal"
           data-target="#searchModal"
         >
-          <i class="tim-icons icon-zoom-split"></i>
+          LOGIN
+          <!-- <i class="tim-icons icon-zoom-split"></i> -->
         </button>
         <!-- You can choose types of search input -->
       </div>
       <modal
-        :show.sync="searchModalVisible"
+        :show.sync="loginModalVisible"
         class="modal-search"
         id="searchModal"
         :centered="false"
         :show-close="true"
       >
-        <input
-          slot="header"
-          v-model="searchQuery"
-          type="text"
-          class="form-control"
-          id="inlineFormInputGroup"
-          placeholder="SEARCH"
-        />
+        <Login/>
       </modal>
+
+      <div class="search-bar input-group" v-on:click = "openRegiModals">
+        <!--
+          <input type="text" class="form-control" placeholder="Search...">
+          <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div>
+        -->
+        <button
+          class="btn btn-link"
+          id="search-button"
+          data-toggle="modal"
+          data-target="#searchModal2"
+        >
+          REGISTER
+          <!-- <i class="tim-icons icon-zoom-split"></i> -->
+        </button>
+        <!-- You can choose types of search input -->
+      </div>
+      <modal
+        :show.sync="getRegiModal"
+        class="modal-search"
+        id="searchModal2"
+        :centered="false"
+        :show-close="true"
+      >
+        <Register/>
+      </modal>
+
+
+
       <base-dropdown
         tag="li"
         :menu-on-right="!$rtl.isRTL"
@@ -120,12 +144,18 @@ import { CollapseTransition } from 'vue2-transitions';
 import { BaseNav, Modal } from '@/components';
 import SidebarToggleButton from './SidebarToggleButton';
 
+import Login from '../Pages/Login.vue'
+import Register from '../Pages/Register.vue'
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     SidebarToggleButton,
     CollapseTransition,
     BaseNav,
-    Modal
+    Modal,
+    Login,
+    Register,
   },
   computed: {
     routeName() {
@@ -134,13 +164,15 @@ export default {
     },
     isRTL() {
       return this.$rtl.isRTL;
-    }
+    },
+    ...mapGetters(["getRegiModal"]),
   },
   data() {
     return {
       activeNotifications: false,
       showMenu: false,
-      searchModalVisible: false,
+      loginModalVisible: false,
+      registerModalVisible: false,
       searchQuery: ''
     };
   },
@@ -162,8 +194,13 @@ export default {
     },
     toggleMenu() {
       this.showMenu = !this.showMenu;
+    },
+    ///////////////////////////////////////
+    openRegiModals() {
+      this.$store.commit('openRegiModal', true);
     }
-  }
+  },
+
 };
 </script>
 <style scoped>

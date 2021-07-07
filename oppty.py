@@ -197,6 +197,8 @@ df = df.join(dummie)
 #df = df.join(dummie)
 
 
+# %%
+#데이터 확인 
 
 print(df[['MONTH','X_STATUS_CD']].groupby('MONTH', as_index=False).mean())
 #print(df[['QUARTER','X_STATUS_CD']].groupby('QUARTER', as_index=False).mean())
@@ -291,7 +293,11 @@ plt.rcParams['figure.figsize'] = (20,40)
 plt.barh(X_test.columns, classifier.feature_importances_)
 
 
-#####################################################
+
+# In[49]:
+
+plt.rcParams['figure.figsize'] = (20,40)
+plt.barh(X_test.columns, classifier.feature_importances_)
 
 
 # In[49]:
@@ -307,11 +313,14 @@ pickle.dump(scaler1, open('scaler1.sav', 'wb'))
 pickle.dump(scaler2, open('scaler2.sav', 'wb'))
 
 # %%
-
+import pickle
 s1 = pickle.load(open('scaler1.sav', 'rb'))
 s2 = pickle.load(open('scaler2.sav', 'rb'))
 cf = pickle.load(open('Model1.sav', 'rb'))
 
+#%%
+plt.rcParams['figure.figsize'] = (20,40)
+plt.barh(X_test.columns, cf.feature_importances_)
 
 # %%
 list(X_test)

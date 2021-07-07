@@ -28,8 +28,9 @@ public class UserController {
 	}
 	
 	//회원가입
-	@PostMapping("/signUp")
+	@PostMapping("/register")
 	public ResponseEntity<?> userEnroll(@RequestBody UserVo uservo) {
+		System.out.println("================================================");
 		System.out.println(uservo);
 		int num = User.signUp(uservo);
 		return ResponseEntity.status(HttpStatus.OK).body(num);

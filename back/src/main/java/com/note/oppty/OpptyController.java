@@ -1,12 +1,17 @@
 package com.note.oppty;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.note.user.UserVo;
 
 
 
@@ -17,15 +22,14 @@ public class OpptyController {
 	@Autowired
 	private OpptyService OpptyService;
 	
-//	@GetMapping("/get")
-//	public ResponseEntity<?> getUser() {
-//		List<UserVo> users = User.selectUserList();
-//		return ResponseEntity.status(HttpStatus.OK).body(users);
-//	}
+	@GetMapping("/getAll")
+	public ResponseEntity<?> selectOpptyList() {
+		List<OpptyVo> oppty = OpptyService.selectOpptyList();
+		return ResponseEntity.status(HttpStatus.OK).body(oppty);
+	}
 	
-	//회원가입
 	@PostMapping("/getData")
-	public ResponseEntity<?> userEnroll(@RequestBody OpptyVo opptyVo) {
+	public ResponseEntity<?> getData(@RequestBody OpptyVo opptyVo) {
 		System.out.println(opptyVo);
 		String num = OpptyService.getData(opptyVo);
 		return ResponseEntity.status(HttpStatus.OK).body(num);

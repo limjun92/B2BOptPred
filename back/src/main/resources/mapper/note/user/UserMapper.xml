@@ -8,10 +8,9 @@
 	</select>
 	
 	<insert id="signUp" parameterType="User">
-        insert into users (users_id,users_password,users_tel,users_nickname,
+        insert into users (users_password,
         users_name,users_email)
-        values (#{usersId}, #{usersPassword}, #{usersTel},
-         #{usersNickname},  #{usersName}, #{usersEmail})
+        values (#{usersPassword}, #{usersName}, #{usersEmail})
      </insert>
 	
 </mapper>

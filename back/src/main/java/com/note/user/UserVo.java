@@ -24,12 +24,8 @@ public class UserVo {
 		System.out.println("uservo");
 	}
 	
-	public UserVo(String usersId, String usersPassword, String usersTel, String usersNickname, String usersName,
-			String usersEmail) {
-		this.usersId = usersId;
+	public UserVo(String usersPassword, String usersName, String usersEmail) {
 		this.usersPassword = usersPassword;
-		this.usersTel = usersTel;
-		this.usersNickname = usersNickname;
 		this.usersName = usersName;
 		this.usersEmail = usersEmail;
 	}

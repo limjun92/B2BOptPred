@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-5 ml-auto">
+      <!-- <div class="col-md-5 ml-auto">
         <div class="info-area info-horizontal mt-5">
           <div class="icon icon-warning">
             <i class="tim-icons icon-wifi"></i>
@@ -38,7 +38,7 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="col-md-7 mr-auto">
         <form @submit.prevent="register">
@@ -115,7 +115,13 @@ export default {
     async register() {
       let isValidForm = await this.$validator.validateAll();
       if (isValidForm) {
-        // TIP use this.model to send it to api and perform register call
+        const userInfo = {
+          usersEmail: this.model.email,
+          usersName: this.model.fullName,
+          usersPassword: this.model.password
+        }
+        this.$store.dispatch("register", userInfo);
+        this.$store.commit('openRegiModal', false);
       }
     }
   }

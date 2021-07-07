@@ -6,18 +6,22 @@
       <div>관리고객 회선수</div>
       <div><input v-model = 'p_circuitNum' type="text"/></div>
       <div>투자유형</div>
-      <div><input v-model = 'p_invstStgCd' type="text"/></div>
+      <input type="radio" id="one" value="1" v-model='p_invstStgCd'>
+      <label for="one">A</label>
+      <input type="radio" id="one" value="0" v-model='p_invstStgCd'>
+      <label for="one">B</label>
+      <!-- <div><input v-model = 'p_invstStgCd' type="text"/></div> -->
       <div>기회유형</div>
-      <div><input v-model = 'p_xoptyType' type="text"/></div>
+      <input type="radio" id="one" value="1" v-model='p_xoptyType'>
+      <label for="one">A</label>
+      <input type="radio" id="one" value="0" v-model='p_xoptyType'>
+      <label for="one">B</label>
+      <!-- <div><input v-model = 'p_xoptyType' type="text"/></div> -->
       <!-- <div><input v-model = 'p_xtext' type="text"/>{{p_xtext}}</div> -->
       <div>
         <div>업종분류</div>
       <select v-model='p_xtext'>
         <option disabled value="">Please select t_text</option>
-        <option>BEF_1M_SLNG_AMT</option>
-        <option>CIRCUIT_NUM</option>
-        <option>INVST_STG_CD</option>
-        <option>X_OPTY_TYPE</option>
         <option>1차산업</option>
         <option>IT서비스</option>
         <option>Other</option>
@@ -159,24 +163,6 @@
         <option>화학</option>
         <option>환경</option>
         <option>회로기판</option>
-        <option>201</option>
-        <option>402</option>
-        <option>404</option>
-        <option>701</option>
-        <option>901</option>
-        <option>G01</option>
-        <option>10월</option>
-        <option>11월</option>
-        <option>12월</option>
-        <option>1월</option>
-        <option>2월</option>
-        <option>3월</option>
-        <option>4월</option>
-        <option>5월</option>
-        <option>6월</option>
-        <option>7월</option>
-        <option>8월</option>
-        <option>9월</option>
       </select>
       </div>
       <div>고객분류</div>
@@ -206,8 +192,21 @@
         <option>9월</option>
       </select>
       </div>
-      <div v-on:click = "sendData">버튼</div>
-      <div>{{getData}}</div>
+      <div><button v-on:click = "sendData">제출</button></div>
+      <div><h1>수주율 : {{getData}} %</h1></div>
+      <div>-------------------------------------------</div>
+      <table border = "1">
+      <th v-for="(la,index) in label" :key="index" >
+              {{la}}
+      </th>
+      <tr v-for="(oppty, index) in getOppty" :key = "'A' + index">
+        <td v-for="(o,index) in oppty" :key="'B'+index" >
+            {{o}}
+          </td>
+      </tr>
+
+      </table>
+
   </div>
 </template>
 
@@ -223,14 +222,20 @@ export default {
             p_xtext: "",
             p_marketClassCd: "",
             p_createMonth: "",
+            label : ['id','수주율','USER','NEW_OR_OLD','관리고객최근매출액','관리고객 회선수','투자유형','기회유형','업종분류','고객분류','시작월','생성일자']
         }
     },
     computed: {
         ...mapGetters(["getData"]),
+        ...mapGetters(["getOppty"]),
     },
 
     methods:{
         sendData(){
+            if(this.p_bef1mSlngAmt == ''|| this.p_circuitNum == '' ||this.p_invstStgCd == ''  || this.p_xoptyType == '' || this.p_xtext == '' || this.p_marketClassCd == '' || this.p_createMonth == ''){
+              alert("값을 모두 입력하세요")
+              return
+            }
             const datas = {
                 bef1mSlngAmt: this.p_bef1mSlngAmt,
                 circuitNum: this.p_circuitNum,
@@ -241,8 +246,20 @@ export default {
                 createMonth: this.p_createMonth,
             } 
             this.$store.dispatch("loadData", datas);
+            this.p_bef1mSlngAmt = "";
+            this.p_circuitNum = "";
+            this.p_invstStgCd = "";
+            this.p_xoptyType = "";
+            this.p_xtext = "";
+            this.p_marketClassCd = "";
+            this.p_createMonth = "";
         }
-    }
+    },
+    watch:{
+      getData:function(){
+          this.$store.dispatch("loadOpptyList");
+      },
+    },
 }
 </script>
 

@@ -246,7 +246,7 @@ def get_result(v1,v2,v3,v4,v5,v6,v7):
                         axis=1)
     scaled_data = pd.concat([sample_test.iloc[:, 2:], scaled_data], axis=1)
     
-    print(cf.predict_proba(scaled_data)[0][1])
+    print(round(cf.predict_proba(scaled_data)[0][1]*100,2))
 
 def main(argv):
     get_result(argv[1],argv[2],argv[3],argv[4],argv[5],argv[6],argv[7])

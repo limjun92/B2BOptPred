@@ -12,9 +12,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.note.user.UserVo;
+
 
 @Service
 public class OpptyService {
+	
+	@Autowired
+	private OpptyMapper opptymapper;
 	
 	public String getData(OpptyVo opptyVo) {
 		String re = "";
@@ -37,6 +42,12 @@ public class OpptyService {
             e.printStackTrace();
         }
         System.out.println(re);
+        
+        OpptyVo opptyResult = new OpptyVo(re, "준형", "기존", opptyVo.getBef1mSlngAmt(),opptyVo.getCircuitNum(),
+        		opptyVo.getInvstStgCd(),opptyVo.getXoptyType(),opptyVo.getXtext(),opptyVo.getMarketClassCd(),opptyVo.getCreateMonth());
+     
+        opptymapper.getData(opptyResult);
+        
         return re;
 	}
 	
@@ -55,5 +66,9 @@ public class OpptyService {
 	    System.out.println("output: " + outputStream.toString());
 	    return outputStream.toString();
 
-	}  
+	}
+	
+	public List<OpptyVo> selectOpptyList() {
+		return opptymapper.selectOpptyList();
+	}
 }
