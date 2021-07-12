@@ -5,6 +5,7 @@ let api_url = `http://localhost:8888/devpro/getuser`;
 const state = {
     registerCheck : 0,
     regiModal : false,
+    loginModal : false,
 }; 
 
 const actions = {
@@ -24,6 +25,9 @@ const getters = {
     },
     getRegiModal(state){
         return state.regiModal;
+    },
+    getLoginModal(state){
+        return state.loginModal;
     }
 }; //getters
 
@@ -34,6 +38,9 @@ const mutations = {
     },
     openRegiModal(state, items){
         state.regiModal = items;
+    },
+    openLoginModal(state, items){
+        state.loginModal = items;
     }
 };
 

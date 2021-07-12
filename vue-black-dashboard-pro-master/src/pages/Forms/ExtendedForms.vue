@@ -83,7 +83,7 @@
             <h4 class="card-title">Customisable Select</h4>
             <div class="row">
               <div class="col-md-6">
-                <el-select
+                <el-select 
                   class="select-primary"
                   size="large"
                   placeholder="Single Select"
@@ -245,32 +245,11 @@ export default {
       selects: {
         simple: '',
         countries: [
-          { value: 'Bahasa Indonesia', label: 'Bahasa Indonesia' },
-          { value: 'Bahasa Melayu', label: 'Bahasa Melayu' },
-          { value: 'Català', label: 'Català' },
-          { value: 'Dansk', label: 'Dansk' },
-          { value: 'Deutsch', label: 'Deutsch' },
-          { value: 'English', label: 'English' },
-          { value: 'Español', label: 'Español' },
-          { value: 'Eλληνικά', label: 'Eλληνικά' },
-          { value: 'Français', label: 'Français' },
-          { value: 'Italiano', label: 'Italiano' },
-          { value: 'Magyar', label: 'Magyar' },
-          { value: 'Nederlands', label: 'Nederlands' },
-          { value: 'Norsk', label: 'Norsk' },
-          { value: 'Polski', label: 'Polski' },
-          { value: 'Português', label: 'Português' },
-          { value: 'Suomi', label: 'Suomi' },
-          { value: 'Svenska', label: 'Svenska' },
-          { value: 'Türkçe', label: 'Türkçe' },
-          { value: 'Íslenska', label: 'Íslenska' },
-          { value: 'Čeština', label: 'Čeština' },
-          { value: 'Русский', label: 'Русский' },
-          { value: 'ภาษาไทย', label: 'ภาษาไทย' },
-          { value: '中文 (简体)', label: '中文 (简体)' },
-          { value: 'W">中文 (繁體)', label: 'W">中文 (繁體)' },
-          { value: '日本語', label: '日本語' },
-          { value: '한국어', label: '한국어' }
+          { value: '1차산업', label: '1차산업' },
+          { value: 'IT서비스', label: 'IT서비스' },
+          { value: 'Other', label: 'Other' },
+          { value: 'VAN', label: 'VAN' },
+          { value: '가구/목재품', label: '가구/목재품' },
         ],
         multiple: 'ARS'
       },

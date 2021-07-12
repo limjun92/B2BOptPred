@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+  <!-- <div class="container"> -->
+    <!-- <div class="col-lg-12 col-md-6 ml-auto mr-auto"> -->
       <form @submit.prevent="login">
         <card class="card-login card-white">
           <template slot="header">
@@ -36,21 +36,13 @@
               Get Started
             </base-button>
             <div class="pull-left">
-              <h6>
-                <router-link class="link footer-link" to="/register">
+                <div v-on:click = "openRegiModals">
                   Create Account
-                </router-link>
-              </h6>
-            </div>
-
-            <div class="pull-right">
-              <h6><a href="#pablo" class="link footer-link">Need Help?</a></h6>
+                </div>
             </div>
           </div>
         </card>
       </form>
-    </div>
-  </div>
 </template>
 <script>
 export default {
@@ -72,6 +64,10 @@ export default {
       if (isValidForm) {
         // TIP use this.model to send it to api and perform login call
       }
+    },
+    openRegiModals(){
+      this.$store.commit('openRegiModal', true);
+      this.$store.commit('openLoginModal', false);
     }
   }
 };

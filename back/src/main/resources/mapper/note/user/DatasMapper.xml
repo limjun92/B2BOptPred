@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.note.oppty.DatasMapper">
+	
+     <insert id="insertDatas" parameterType="Datas">
+        insert into oppty_datas (user_id,NAME,X_STATUS_CD,SUM_WIN_PROB,INVST_STG_CD,X_OPTY_TYPE,MARKET_CLASS_CD,CREATED,CLOSE_DT,BEF_1M_SLNG_AMT,CIRCUIT_NUM,X_CODE,X_TEXT,SLNG_AMT,PURE_PRFIT_AMT,MIN_CH_DT,MAX_CH_DT)
+        values (#{userId}, #{name}, #{xstatusCd},#{sumWinProb}, #{invstStgCd},#{optyType}, #{marketClassCd}, #{created}, #{closeDt}, #{bef1mSlgnAmt},#{circuitNum},#{code},#{text},#{slngAmt},#{purePrfit},#{minChDt},#{maxChDt})
+     </insert>
+     
+     <select id="loadAllData" resultType="Datas">
+     	select *
+     	from oppty_datas
+     </select>
+	
+</mapper>

@@ -50,9 +50,9 @@
             </slot>
           </div>
 
-          <div v-if="$slots.default" class="modal-body" :class="bodyClasses">
+          <!-- <div v-if="$slots.default" class="modal-body" :class="bodyClasses"> -->
             <slot></slot>
-          </div>
+          <!-- </div> -->
 
           <div class="modal-footer" :class="footerClasses" v-if="$slots.footer">
             <slot name="footer"></slot>
@@ -131,8 +131,8 @@ export default {
   },
   methods: {
     closeModal() {
-      this.$emit('update:show', false);
-      this.$emit('close');
+      this.$store.commit('openRegiModal', false);
+      this.$store.commit('openLoginModal', false);
     },
     scrollModalToBottom() {
       if (!this.scrollToBottom) return;

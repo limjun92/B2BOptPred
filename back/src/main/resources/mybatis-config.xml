@@ -29,5 +29,6 @@
     <typeAliases>
         <typeAlias alias="User" type="com.note.user.UserVo"/>
         <typeAlias alias="Oppty" type="com.note.oppty.OpptyVo"/>
+        <typeAlias alias="Datas" type="com.note.oppty.DatasVo"/>
     </typeAliases>
 </configuration>

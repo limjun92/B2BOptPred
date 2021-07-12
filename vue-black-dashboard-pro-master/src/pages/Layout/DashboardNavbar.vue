@@ -21,8 +21,8 @@
     </div>
   
     <ul class="navbar-nav" :class="$rtl.isRTL ? 'mr-auto' : 'ml-auto'">
-      <!-- ================================================================ --> 
-      <div class="search-bar input-group" @click="loginModalVisible = true">
+      <!-- ==============================LOGIN=============================== --> 
+      <div class="search-bar input-group" v-on:click = "openLoginModals">
         <!--
           <input type="text" class="form-control" placeholder="Search...">
           <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div>
@@ -39,7 +39,7 @@
         <!-- You can choose types of search input -->
       </div>
       <modal
-        :show.sync="loginModalVisible"
+        :show.sync="getLoginModal"
         class="modal-search"
         id="searchModal"
         :centered="false"
@@ -47,7 +47,7 @@
       >
         <Login/>
       </modal>
-
+   <!-- ==============================REGISTER=============================== --> 
       <div class="search-bar input-group" v-on:click = "openRegiModals">
         <!--
           <input type="text" class="form-control" placeholder="Search...">
@@ -72,6 +72,14 @@
         :show-close="true"
       >
         <Register/>
+        <!-- <input
+          slot="header"
+          v-model="searchQuery"
+          type="text"
+          class="form-control"
+          id="inlineFormInputGroup"
+          placeholder="SEARCH"
+        /> -->
       </modal>
 
 
@@ -166,6 +174,7 @@ export default {
       return this.$rtl.isRTL;
     },
     ...mapGetters(["getRegiModal"]),
+    ...mapGetters(['getLoginModal'])
   },
   data() {
     return {
@@ -198,6 +207,9 @@ export default {
     ///////////////////////////////////////
     openRegiModals() {
       this.$store.commit('openRegiModal', true);
+    },
+    openLoginModals() {
+      this.$store.commit('openLoginModal', true);
     }
   },
 

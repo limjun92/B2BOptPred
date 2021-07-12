@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="row">
+  <!-- <div class="container"> -->
+    <!-- <div class="row"> -->
       <!-- <div class="col-md-5 ml-auto">
         <div class="info-area info-horizontal mt-5">
           <div class="icon icon-warning">
@@ -40,7 +40,7 @@
         </div>
       </div> -->
 
-      <div class="col-md-7 mr-auto">
+      <!-- <div class="col-md-12 mr-auto"> -->
         <form @submit.prevent="register">
           <card class="card-register card-white">
             <template slot="header">
@@ -88,9 +88,9 @@
             </base-button>
           </card>
         </form>
-      </div>
-    </div>
-  </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
 </template>
 <script>
 import { BaseCheckbox } from 'src/components';
@@ -127,4 +127,5 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+</style>

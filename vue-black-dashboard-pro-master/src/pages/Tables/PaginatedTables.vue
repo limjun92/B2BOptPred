@@ -110,13 +110,14 @@
             </base-pagination>
           </div>
         </card>
+        <div v-on:click = 'InsertData'>제출</div>
       </div>
-    </div></div
-></template>
+    </div>
+    </div>
+    </template>
 <script>
 import { Table, TableColumn, Select, Option } from 'element-ui';
 import { BasePagination } from 'src/components';
-import users from './users';
 import Fuse from 'fuse.js';
 import swal from 'sweetalert2';
 
@@ -157,6 +158,8 @@ export default {
   },
   data() {
     return {
+      lowerlabel:['name','xstatusCd','sumWinProb' ,'invstStgCd' ,'optyType' , 'marketClassCd',
+      'created' , 'closeDt','bef1mSlgnAmt','circuitNum','code','text','slngAmt' ,'purePrfit','minChDt' ,'maxChDt'],
       tables:[],
       pagination: {
         perPage: 5,
@@ -168,87 +171,97 @@ export default {
       propsToSearch: ['name', 'email', 'age'],
       tableColumns: [
         {
-          prop: 'NAME',
+          prop: 'name',
           label: 'Name',
           minWidth: 200
         },
         {
-          prop: 'X_STATUS_CD',
+          prop: 'xstatusCd',
           label: 'X_STATUS_CD',
           minWidth: 200
         },
         {
-          prop: 'SUM_WIN_PROB',
+          prop: 'sumWinProb',
           label: 'SUM_WIN_PROB',
           minWidth: 200
         },
         {
-          prop: 'INVST_STG_CD',
+          prop: 'invstStgCd',
           label: 'INVST_STG_CD',
           minWidth: 200
         },
         {
-          prop: 'X_OPTY_TYPE',
+          prop: 'optyType',
           label: 'X_OPTY_TYPE',
           minWidth: 200
         },
         {
-          prop: 'MARKET_CLASS_CD',
+          prop: 'marketClassCd',
           label: 'MARKET_CLASS_CD',
           minWidth: 200
         },
         {
-          prop: 'CREATED',
+          prop: 'created',
           label: 'CREATED',
           minWidth: 200
         },
         {
-          prop: 'CLOSE_DT',
+          prop: 'closeDt',
           label: 'CLOSE_DT',
           minWidth: 200
         },
         {
-          prop: 'BEF_1M_SLNG_AMT',
+          prop: 'bef1mSlgnAmt',
           label: 'BEF_1M_SLNG_AMT',
           minWidth: 200
         },
         {
-          prop: 'CIRCUIT_NUM',
+          prop: 'circuitNum',
           label: 'CIRCUIT_NUM',
           minWidth: 200
         },
         {
-          prop: 'X_CODE',
+          prop: 'code',
           label: 'X_CODE',
           minWidth: 200
         },
         {
-          prop: 'SLNG_AMT',
+          prop: 'text',
+          label: 'X_TEXT',
+          minWidth: 200
+        },
+        {
+          prop: 'slngAmt',
           label: 'SLNG_AMT',
           minWidth: 200
         },
         {
-          prop: 'PURE_PRFIT_AMT',
+          prop: 'purePrfit',
           label: 'PURE_PRFIT_AMT',
           minWidth: 200
         },
         {
-          prop: 'MIN_CH_DT',
+          prop: 'minChDt',
           label: 'MIN_CH_DT',
           minWidth: 200
         },
         {
-          prop: 'MAX_CH_DT',
+          prop: 'maxChDt',
           label: 'MAX_CH_DT',
           minWidth: 200
         },
       ],
-      tableData: users,
+      tableData: [],
       searchedData: [],
       fuseSearch: null
     };
   },
   methods: {
+    InsertData(){
+      for(var i = 0;i<this.tables.length;i++){
+        this.$store.dispatch("insertData", this.tables[i]);
+      }
+    },
     handleFileUpload() {
       this.files = this.$refs.files.files;
       const reader = new FileReader();
@@ -258,17 +271,15 @@ export default {
 
         var labels = this.allData[0].split(",");
         var datas = [];
-        for(var i = 1;i<5;i++){
+        for(var i = 1;i<100;i++){
           var obj = {};
-          datas.push(this.allData[i].split(","));
+          obj['userId'] = '준형'
           var row = this.allData[i].split(",");
-          console.log(row)
-          for(let j = 0;j<labels.length;j++){
-            obj[labels[j]] = row[j];
+          for(let j = 0;j<this.lowerlabel.length;j++){
+            obj[this.lowerlabel[j]] = row[j];
           }
           this.tables.push(obj);
         }
-        
         this.tableData = this.tables;
       };
       reader.readAsText(this.files[0],"euc-kr");
