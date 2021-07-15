@@ -10,6 +10,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class OpptyVo {
+	private String name;
 	private String opptyResultNo;
 	private String opptyResult;
 	private String usersId;
@@ -17,8 +18,8 @@ public class OpptyVo {
 	private String bef1mSlngAmt;
 	private String circuitNum;
 	private String invstStgCd;
-	private String xoptyType;
-	private String xtext;
+	private String optyType;
+	private String text;
 	private String marketClassCd;
 	private String createMonth;
 	private Timestamp joinDate;
@@ -27,29 +28,31 @@ public class OpptyVo {
 		System.out.println("opptyVo");
 	}
 
-	public OpptyVo(String bef1mSlngAmt, String circuitNum, String invstStgCd, String xoptyType, String xtext,
+	public OpptyVo(String name, String bef1mSlngAmt, String circuitNum, String invstStgCd, String optyType, String text,
 			String marketClassCd, String createMonth) {
 		super();
+		this.name = name;
 		this.bef1mSlngAmt = bef1mSlngAmt;
 		this.circuitNum = circuitNum;
 		this.invstStgCd = invstStgCd;
-		this.xoptyType = xoptyType;
-		this.xtext = xtext;
+		this.optyType = optyType;
+		this.text = text;
 		this.marketClassCd = marketClassCd;
 		this.createMonth = createMonth;
 	}
 
-	public OpptyVo(String opptyResult, String usersId, String newOrOld, String bef1mSlngAmt, String circuitNum, String invstStgCd,
-			String xoptyType, String xtext, String marketClassCd, String createMonth) {
+	public OpptyVo(String name, String opptyResult, String usersId, String newOrOld, String bef1mSlngAmt, String circuitNum, String invstStgCd,
+			String optyType, String text, String marketClassCd, String createMonth) {
 		super();
+		this.name = name;
 		this.opptyResult = opptyResult;
 		this.usersId = usersId;
 		this.newOrOld = newOrOld;
 		this.bef1mSlngAmt = bef1mSlngAmt;
 		this.circuitNum = circuitNum;
 		this.invstStgCd = invstStgCd;
-		this.xoptyType = xoptyType;
-		this.xtext = xtext;
+		this.optyType = optyType;
+		this.text = text;
 		this.marketClassCd = marketClassCd;
 		this.createMonth = createMonth;
 	}

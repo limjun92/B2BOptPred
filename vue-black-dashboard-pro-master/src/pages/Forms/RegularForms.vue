@@ -91,8 +91,8 @@
             <div class="row">
               <label class="col-sm-2 col-form-label">기회유형</label>
               <div class="col-sm-10">
-                <base-radio name="1" v-model="datas.xoptyType" inline>A</base-radio>
-                <base-radio name="0" v-model="datas.xoptyType" inline>B</base-radio>
+                <base-radio name="1" v-model="datas.optyType" inline>A</base-radio>
+                <base-radio name="0" v-model="datas.optyType" inline>B</base-radio>
               </div>
             </div>
             <div class="row">
@@ -101,27 +101,27 @@
               >
               <div class="col-sm-10 checkbox-radios">
 
-                <base-radio name="1차산업" v-model="datas.xtext" inline> 1차산업 </base-radio>
-                <base-radio name="가전" v-model="datas.xtext" inline> 가전 </base-radio>
-                <base-radio name="건설" v-model="datas.xtext" inline> 건설 </base-radio>
-                <base-radio name="공공" v-model="datas.xtext" inline> 공공 </base-radio>
-                <base-radio name="공단" v-model="datas.xtext" inline> 공단 </base-radio>
-                <base-radio name="관광" v-model="datas.xtext" inline> 관광 </base-radio>
-                <base-radio name="교육" v-model="datas.xtext" inline> 교육 </base-radio>
-                <base-radio name="교통" v-model="datas.xtext" inline> 교통 </base-radio>
-                <base-radio name="국방" v-model="datas.xtext" inline> 국방 </base-radio>
-                <base-radio name="금속" v-model="datas.xtext" inline> 금속 </base-radio>
+                <base-radio name="1차산업" v-model="datas.text" inline> 1차산업 </base-radio>
+                <base-radio name="가전" v-model="datas.text" inline> 가전 </base-radio>
+                <base-radio name="건설" v-model="datas.text" inline> 건설 </base-radio>
+                <base-radio name="공공" v-model="datas.text" inline> 공공 </base-radio>
+                <base-radio name="공단" v-model="datas.text" inline> 공단 </base-radio>
+                <base-radio name="관광" v-model="datas.text" inline> 관광 </base-radio>
+                <base-radio name="교육" v-model="datas.text" inline> 교육 </base-radio>
+                <base-radio name="교통" v-model="datas.text" inline> 교통 </base-radio>
+                <base-radio name="국방" v-model="datas.text" inline> 국방 </base-radio>
+                <base-radio name="금속" v-model="datas.text" inline> 금속 </base-radio>
                 <br>
-                <base-radio name="금융" v-model="datas.xtext" inline> 금융 </base-radio>
-                <base-radio name="기계" v-model="datas.xtext" inline> 기계 </base-radio>
-                <base-radio name="농업" v-model="datas.xtext" inline> 농업 </base-radio>
-                <base-radio name="레저/여행" v-model="datas.xtext" inline> 레저/여행 </base-radio>
-                <base-radio name="무역" v-model="datas.xtext" inline> 무역 </base-radio>
-                <base-radio name="방송" v-model="datas.xtext" inline> 방송 </base-radio>
-                <base-radio name="법률" v-model="datas.xtext" inline> 법률 </base-radio>
-                <base-radio name="병원" v-model="datas.xtext" inline> 병원 </base-radio>
-                <base-radio name="부동산" v-model="datas.xtext" inline> 부동산 </base-radio>
-                <base-radio name="기타" v-model="datas.xtext" inline> 기타 </base-radio>
+                <base-radio name="금융" v-model="datas.text" inline> 금융 </base-radio>
+                <base-radio name="기계" v-model="datas.text" inline> 기계 </base-radio>
+                <base-radio name="농업" v-model="datas.text" inline> 농업 </base-radio>
+                <base-radio name="레저/여행" v-model="datas.text" inline> 레저/여행 </base-radio>
+                <base-radio name="무역" v-model="datas.text" inline> 무역 </base-radio>
+                <base-radio name="방송" v-model="datas.text" inline> 방송 </base-radio>
+                <base-radio name="법률" v-model="datas.text" inline> 법률 </base-radio>
+                <base-radio name="병원" v-model="datas.text" inline> 병원 </base-radio>
+                <base-radio name="부동산" v-model="datas.text" inline> 부동산 </base-radio>
+                <base-radio name="기타" v-model="datas.text" inline> 기타 </base-radio>
 
               </div>
             </div>
@@ -235,12 +235,13 @@ export default {
     return {
       getresult : 0,
       datas: {
+        name:'',
         bef1mSlngAmt: '',
         circuitNum: '',
         createMonth: '',
         invstStgCd: '',
-        xoptyType: '',
-        xtext: '',
+        optyType: '',
+        text: '',
         marketClassCd: '',
       },
       radios: {
@@ -287,7 +288,7 @@ export default {
               pointHoverRadius: 0,
               backgroundColor: ['#00c09d', '#e2e2e2'],
               borderWidth: 0,
-              data: [40,60]
+              data: [100 - this.getData,this.getData]
             }
           ]
         },
@@ -320,7 +321,7 @@ export default {
     },
     sendData(){
       console.log(this.pieChart1.chartData.datasets[0].data[0])
-      if(this.datas.p_bef1mSlngAmt == ''|| this.datas.p_circuitNum == '' ||this.datas.p_invstStgCd == ''  || this.datas.p_xoptyType == '' || this.datas.p_xtext == '' || this.datas.p_marketClassCd == '' || this.datas.p_createMonth == ''){
+      if(this.datas.bef1mSlngAmt == ''|| this.datas.circuitNum == '' ||this.datas.invstStgCd == ''  || this.datas.optyType == '' || this.datas.text == '' || this.datas.marketClassCd == '' || this.datas.createMonth == ''){
         alert("값을 모두 입력하세요")
         return
       }

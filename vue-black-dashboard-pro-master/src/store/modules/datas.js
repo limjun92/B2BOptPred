@@ -33,11 +33,10 @@ const getters = {
 
 const mutations = {
     setInsertResultData(state, items){
-        console.log(items)
+        // console.log(items)
         state.data = items;
     },
     setLoadAllData(state, items){
-        console.log(items)
         state.allData = items;
     }
 };

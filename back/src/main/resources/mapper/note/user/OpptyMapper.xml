@@ -10,8 +10,8 @@
 	</select>
 	
 	<insert id="getData" parameterType="Oppty">
-        insert into oppty_result (oppty_result,users_id,new_or_old,bef_1m_slng_amt,cir_cuit_num,invst_stg_cd,xopty_type,x_text,market_class_cd,create_month)
-        values (#{opptyResult}, #{usersId}, #{newOrOld},#{bef1mSlngAmt}, #{circuitNum},#{invstStgCd}, #{xoptyType}, #{xtext}, #{marketClassCd}, #{createMonth})
+        insert into oppty_result (name, opptyResult,usersId,newOrOld,bef1mSlngAmt,circuitNum,invstStgCd,optyType,text,marketClassCd,createMonth)
+        values (#{name}, #{opptyResult}, #{usersId}, #{newOrOld},#{bef1mSlngAmt}, #{circuitNum},#{invstStgCd}, #{optyType}, #{text}, #{marketClassCd}, #{createMonth})
      </insert>
      
 

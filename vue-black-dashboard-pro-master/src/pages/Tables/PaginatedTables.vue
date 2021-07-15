@@ -159,7 +159,7 @@ export default {
   data() {
     return {
       lowerlabel:['name','xstatusCd','sumWinProb' ,'invstStgCd' ,'optyType' , 'marketClassCd',
-      'created' , 'closeDt','bef1mSlgnAmt','circuitNum','code','text','slngAmt' ,'purePrfit','minChDt' ,'maxChDt'],
+      'createMonth' , 'closeDt','bef1mSlngAmt','circuitNum','code','text','slngAmt' ,'purePrfit','minChDt' ,'maxChDt'],
       tables:[],
       pagination: {
         perPage: 5,
@@ -201,7 +201,7 @@ export default {
           minWidth: 200
         },
         {
-          prop: 'created',
+          prop: 'createMonth',
           label: 'CREATED',
           minWidth: 200
         },
@@ -211,7 +211,7 @@ export default {
           minWidth: 200
         },
         {
-          prop: 'bef1mSlgnAmt',
+          prop: 'bef1mSlngAmt',
           label: 'BEF_1M_SLNG_AMT',
           minWidth: 200
         },

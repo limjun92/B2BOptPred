@@ -7,17 +7,56 @@
         <div class="row">
           <label class="col-sm-2 col-form-label">ID</label>
           <div class="col-sm-10">
-            <base-input placeholder="예측할 정보의 영업정보ID 입력 ex) 1-2435574975">
+            <base-input placeholder="예측할 정보의 영업정보ID 입력 ex) 1-2435574975" v-model="one.name">
               <span slot="helpBlock" class="form-text"
                 >A block of help text that breaks onto a new line.
               </span>
             </base-input>
+            <base-button type="success" class="animation-on-hover" v-on:click = "searchData">조회</base-button>
           </div>
           <div>
-          <base-button type="success" class="animation-on-hover">Success</base-button>
+          <!-- <base-button type="success" class="animation-on-hover" v-on:click = "sendData">Success</base-button> -->
               </div>
-              
+              <!-- <div class="row justify-content-center mt-5"> -->
+      <div class="col-sm-3">
+        <base-input v-model="one.bef1mSlngAmt">
+        </base-input>
+        <base-input v-model="one.circuitNum">
+        </base-input>
+      </div>
+      <div class="col-sm-3">
+        <base-input v-model="one.createMonth">
+        </base-input >
+
+        <base-input v-model="one.invstStgCd">
+        </base-input>
+      </div>
+
+      <div class="col-sm-3">
+        <base-input v-model="one.optyType">
+        </base-input>
+
+        <base-input v-model="one.text">
+        </base-input>
+      </div>
+
+      <div class="col-sm-10">
+        <base-input v-model="one.marketClassCd">
+        </base-input>
+      </div>
+    <!-- </div> -->
         </div>
+        <base-button type="success" class="animation-on-hover" v-on:click = "sendData">예측</base-button>
+        <h5 class="card-category">  수주 성공률 예측 결과</h5>
+          <div class="row">
+            <div class="col-6">
+              <h1 class="card-title">
+                <i class="tim-icons  icon-trophy text-success "></i> <span>{{getData}}</span>
+              </h1>
+              <br>
+
+            </div>
+          </div>
       </card>
       
     </div>
@@ -61,10 +100,10 @@
               width="120">
               <template slot-scope="scope">
                 <Button
-                  v-on:click="deleteRows(scope.$index, tableData)"
+                  v-on:click="setData(scope.$index)"
                   type="text"
                   size="small">
-                  Remove
+                  선택
                 </Button>
               </template>
             </el-table-column>
@@ -79,20 +118,20 @@
             </el-table>
         </card>
       </div>
-      <div class="col-md-12">
+      <!-- <div class="col-md-12">
         <card class="card-chart card-chart-pie">
           <h5 slot="header" class="card-category">  수주 성공률 예측 결과</h5>
           <div class="row">
             <div class="col-6">
               <h1 class="card-title">
-                <i class="tim-icons  icon-trophy text-success "></i> <span>{{getData}}</span>
               </h1>
               <br>
               <h3>SUCCESS!</h3>
             </div>
           </div>
         </card>
-      </div>
+      </div> -->
+      {{one.circuitNum}}
   </div>
 </template>
 <script>
@@ -113,11 +152,21 @@ export default {
   },
   data() {
     return {
+      one: {
+        name : '',
+        bef1mSlngAmt: '',
+        circuitNum: '',
+        createMonth: '',
+        invstStgCd: '',
+        optyType: '',
+        text: '',
+        marketClassCd: '',
+      },
       click_on : {
         name : ''
       },
       lowerlabel:['name','xstatusCd','sumWinProb' ,'invstStgCd' ,'optyType' , 'marketClassCd',
-      'created' , 'closeDt','bef1mSlgnAmt','circuitNum','code','text','slngAmt' ,'purePrfit','minChDt' ,'maxChDt'],
+      'createMonth' , 'closeDt','bef1mSlngAmt','circuitNum','code','text','slngAmt' ,'purePrfit','minChDt' ,'maxChDt'],
       tables:[],
       pagination: {
         perPage: 5,
@@ -161,7 +210,7 @@ export default {
           minWidth: 200
         },
         {
-          prop: 'created',
+          prop: 'createMonth',
           label: 'CREATED',
           minWidth: 200
         },
@@ -171,7 +220,7 @@ export default {
           minWidth: 200
         },
         {
-          prop: 'bef1mSlgnAmt',
+          prop: 'bef1mSlngAmt',
           label: 'BEF_1M_SLNG_AMT',
           minWidth: 200
         },
@@ -218,6 +267,7 @@ export default {
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
     ...mapGetters(["getAllDate"]),
+    ...mapGetters(["getData"]),
 
     queriedData() {
       let result = this.tableData;
@@ -243,12 +293,42 @@ export default {
     }
   },
   methods: {
-    deleteRows(idx, data){
-      console.log(idx)
-      console.log(data[idx])
+    searchData(){
+      for(var i = 0;i<this.tableData.length;i++){
+        if(this.tableData[i].name == this.one.name){
+          this.one.bef1mSlngAmt =  this.tableData[i].bef1mSlngAmt,
+          this.one.circuitNum =  this.tableData[i].circuitNum,
+          this.one.createMonth =  this.tableData[i].createMonth,
+          this.one.invstStgCd =  this.tableData[i].invstStgCd,
+          this.one.optyType =  this.tableData[i].optyType,
+          this.one.text =  this.tableData[i].text,
+          this.one.marketClassCd = this.tableData[i].marketClassCd
+        }
+      }
     },
-    clickData(){
-      console.log("??")
+    sendData(){
+      const tmpdata = {
+          name : this.one.name,
+          bef1mSlngAmt :  this.one.bef1mSlngAmt,
+          circuitNum :  this.one.circuitNum,
+          createMonth :  this.one.createMonth.substr(4,1) == '0'? this.one.createMonth.substr(5,1) + '월':this.one.createMonth.substr(4,2) + '월',
+          invstStgCd :  this.one.invstStgCd == 'A'?'1':'0',
+          optyType :  this.one.optyType == 'A'?'1':'0',
+          text :  this.one.text,
+          marketClassCd : this.one.marketClassCd
+        }
+      console.log(tmpdata)
+      this.$store.dispatch("loadData", tmpdata);
+    },
+    setData(idx){
+      this.one.name = this.tableData[idx].name,
+      this.one.bef1mSlngAmt =  this.tableData[idx].bef1mSlngAmt,
+      this.one.circuitNum =  this.tableData[idx].circuitNum,
+      this.one.createMonth =  this.tableData[idx].createMonth,
+      this.one.invstStgCd =  this.tableData[idx].invstStgCd,
+      this.one.optyType =  this.tableData[idx].optyType,
+      this.one.text =  this.tableData[idx].text,
+      this.one.marketClassCd = this.tableData[idx].marketClassCd
     },
     InsertData(){
       for(var i = 0;i<this.tables.length;i++){
@@ -315,14 +395,14 @@ export default {
         }
       });
     },
-    deleteRow(row) {
-      let indexToDelete = this.tableData.findIndex(
-        tableRow => tableRow.id === row.id
-      );
-      if (indexToDelete >= 0) {
-        this.tableData.splice(indexToDelete, 1);
-      }
-    }
+    // deleteRow(row) {
+    //   let indexToDelete = this.tableData.findIndex(
+    //     tableRow => tableRow.id === row.id
+    //   );
+    //   if (indexToDelete >= 0) {
+    //     this.tableData.splice(indexToDelete, 1);
+    //   }
+    // }
   },
   mounted() {
     // Fuse search initialization.
@@ -330,7 +410,6 @@ export default {
       keys: ['name', 'email'],
       threshold: 0.3
     });
-
     this.$store.dispatch("loadAllData");
   },
   watch: {

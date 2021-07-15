@@ -16,9 +16,9 @@ public class DatasVo {
 	private String invstStgCd;
 	private String optyType;
 	private String marketClassCd;
-	private String created;
+	private String createMonth;
 	private String closeDt;
-	private String bef1mSlgnAmt;
+	private String bef1mSlngAmt;
 	private String circuitNum;
 	private String code;
 	private String text;
@@ -32,7 +32,7 @@ public class DatasVo {
 	}
 
 	public DatasVo(String userId, String name, String xstatusCd, String sumWinProb, String invstStgCd, String optyType,
-			String marketClassCd, String created, String closeDt, String bef1mSlgnAmt, String circuitNum, String code,
+			String marketClassCd, String createMonth, String closeDt, String bef1mSlngAmt, String circuitNum, String code,
 			String text, String slngAmt, String purePrfit, String minChDt, String maxChDt) {
 		super();
 		this.userId = userId;
@@ -42,9 +42,9 @@ public class DatasVo {
 		this.invstStgCd = invstStgCd;
 		this.optyType = optyType;
 		this.marketClassCd = marketClassCd;
-		this.created = created;
+		this.createMonth = createMonth;
 		this.closeDt = closeDt;
-		this.bef1mSlgnAmt = bef1mSlgnAmt;
+		this.bef1mSlngAmt = bef1mSlngAmt;
 		this.circuitNum = circuitNum;
 		this.code = code;
 		this.text = text;
