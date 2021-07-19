@@ -15,7 +15,7 @@ const actions = {
             .then(res => res.data)
             .then(items => (context.commit('setRegister',items)))
             .catch(error => console.error(error));
-    }
+    },
 };
 
 const getters = {

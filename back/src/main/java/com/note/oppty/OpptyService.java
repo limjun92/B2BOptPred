@@ -43,11 +43,10 @@ public class OpptyService {
 			e.printStackTrace();
 		}
 		
-		
 		// "제조/판매"가 없기 때문에 에러가 나는거다
 //		System.out.println(re);
 //		System.out.println(opptyVo.getName() + "?????????????????????");
-		OpptyVo opptyResult = new OpptyVo(opptyVo.getName(), re, "준형", "기존", opptyVo.getBef1mSlngAmt(),
+		OpptyVo opptyResult = new OpptyVo(opptyVo.getName(), opptyVo.getType(), re, "준형", "기존", opptyVo.getBef1mSlngAmt(),
 				opptyVo.getCircuitNum(), opptyVo.getInvstStgCd(), opptyVo.getOptyType(), opptyVo.getText(),
 				opptyVo.getMarketClassCd(), opptyVo.getCreateMonth());
 		

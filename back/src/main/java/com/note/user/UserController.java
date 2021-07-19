@@ -35,4 +35,5 @@ public class UserController {
 		int num = User.signUp(uservo);
 		return ResponseEntity.status(HttpStatus.OK).body(num);
 	}
+	
 }

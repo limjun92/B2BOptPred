@@ -1,283 +1,352 @@
 <template>
-  <div class="extended-forms">
-    <div class="row">
-      <div class="col-md-4">
-        <card>
-          <h4 slot="header" class="card-title">Datetimepicker</h4>
-          <base-input>
-            <el-date-picker
-              type="datetime"
-              placeholder="Date Time Picker"
-              v-model="dateTimePicker"
+  <div class="content">
+    <!-- <input type="file" id="files" ref="files" v-on:change="handleFileUpload()" multiple /> -->
+    <div class="col-md-8 ml-auto mr-auto">
+      
+      <h2 class="text-center">Get Tables</h2>
+      <p class="text-center">
+        
+        <!-- With a selection of custom components & and Element UI components, you
+        can built beautiful data tables. For more info check
+        <a
+          href="http://element.eleme.io/#/en-US/component/table"
+          target="_blank"
+          >Element UI Table</a
+        > -->
+        <input type="file" id="files" ref="files" v-on:change="handleFileUpload()" multiple />
+      </p>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12">
+        <card card-body-classes="table-full-width">
+          <h4 slot="header" class="card-title">Paginated Tables</h4>
+          <div>
+            <div
+              class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap"
             >
-            </el-date-picker>
-          </base-input>
-        </card>
-      </div>
-      <div class="col-md-4">
-        <card>
-          <h4 slot="header" class="card-title">Date Picker</h4>
-          <base-input>
-            <el-date-picker
-              type="date"
-              placeholder="Date Picker"
-              v-model="datePicker"
+              <el-select
+                class="select-primary mb-3 pagination-select"
+                v-model="pagination.perPage"
+                placeholder="Per page"
+              >
+                <el-option
+                  class="select-primary"
+                  v-for="item in pagination.perPageOptions"
+                  :key="item"
+                  :label="item"
+                  :value="item"
+                >
+                </el-option>
+              </el-select>
+
+              <base-input>
+                <el-input
+                  type="search"
+                  class="mb-3 search-input"
+                  clearable
+                  prefix-icon="el-icon-search"
+                  placeholder="Search records"
+                  v-model="searchQuery"
+                  aria-controls="datatables"
+                >
+                </el-input>
+              </base-input>
+            </div>
+            <!-- -->
+            <el-table :data="queriedData">
+              <el-table-column
+              fixed="left"
+              label="Operations"
+              width="120">
+              <template slot-scope="scope">
+                <!-- <div
+                  v-on:click="setData(scope.$index)"
+                  type="text"
+                  size="small">
+                  선택
+                </div> -->
+                <div>
+                  {{predict[scope.$index]}}
+                </div>
+              </template>
+            </el-table-column>
+              <el-table-column
+                v-for="column in tableColumns"
+                :key="column.label"
+                :min-width="column.minWidth"
+                :prop="column.prop"
+                :label="column.label"
+              >
+              </el-table-column>
+              <!-- <el-table-column :min-width="135" align="right" label="Actions">
+                <div slot-scope="props">
+                  <base-button
+                    @click.native="handleLike(props.$index, props.row)"
+                    class="like btn-link"
+                    type="info"
+                    size="sm"
+                    icon
+                  >
+                    <i class="tim-icons icon-heart-2"></i>
+                  </base-button>
+                  <base-button
+                    @click.native="handleEdit(props.$index, props.row)"
+                    class="edit btn-link"
+                    type="warning"
+                    size="sm"
+                    icon
+                  >
+                    <i class="tim-icons icon-pencil"></i>
+                  </base-button>
+                  <base-button
+                    @click.native="handleDelete(props.$index, props.row)"
+                    class="remove btn-link"
+                    type="danger"
+                    size="sm"
+                    icon
+                  >
+                    <i class="tim-icons icon-simple-remove"></i>
+                  </base-button>
+                </div>
+              </el-table-column> -->
+            </el-table>
+          </div>
+          <div
+            slot="footer"
+            class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap"
+          >
+            <div class="">
+              <p class="card-category">
+                Showing {{ from + 1 }} to {{ to }} of {{ total }} entries
+              </p>
+            </div>
+            <base-pagination
+              class="pagination-no-border"
+              v-model="pagination.currentPage"
+              :per-page="pagination.perPage"
+              :total="total"
             >
-            </el-date-picker>
-          </base-input>
+            </base-pagination>
+          </div>
         </card>
-      </div>
-      <div class="col-md-4">
-        <card>
-          <h4 slot="header" class="card-title">Time Picker</h4>
-          <base-input>
-            <el-time-select placeholder="Time Picker" v-model="timePicker">
-            </el-time-select>
-          </base-input>
-        </card>
+        <div v-on:click = 'predictData'>예측</div>
+        {{getData}}
       </div>
     </div>
-    <card>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-md-6">
-            <h4 class="card-title">Toggle Buttons</h4>
-            <div class="row">
-              <div class="col-md-4">
-                <p class="category">Default</p>
-                <base-switch
-                  v-model="switches.defaultOn"
-                  type="primary"
-                  on-text="ON"
-                  off-text="OFF"
-                ></base-switch>
-                &nbsp;
-                <base-switch
-                  v-model="switches.defaultOff"
-                  type="primary"
-                  on-text="ON"
-                  off-text="OFF"
-                ></base-switch>
-              </div>
-              <div class="col-md-4">
-                <p class="category">Plain</p>
-                <base-switch v-model="switches.plainOn"></base-switch>
-                &nbsp;
-                <base-switch v-model="switches.plainOff"></base-switch>
-              </div>
-              <div class="col-md-4">
-                <p class="category">With Icons</p>
-                <base-switch v-model="switches.withIconsOn">
-                  <i class="tim-icons icon-check-2" slot="on"></i>
-                  <i class="tim-icons icon-simple-remove" slot="off"></i>
-                </base-switch>
-                &nbsp;
-                <base-switch v-model="switches.withIconsOff">
-                  <i class="tim-icons icon-check-2" slot="on"></i>
-                  <i class="tim-icons icon-simple-remove" slot="off"></i>
-                </base-switch>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <h4 class="card-title">Customisable Select</h4>
-            <div class="row">
-              <div class="col-md-6">
-                <el-select 
-                  class="select-primary"
-                  size="large"
-                  placeholder="Single Select"
-                  v-model="selects.simple"
-                >
-                  <el-option
-                    v-for="option in selects.countries"
-                    class="select-primary"
-                    :value="option.value"
-                    :label="option.label"
-                    :key="option.label"
-                  >
-                  </el-option>
-                </el-select>
-              </div>
-              <div class="col-md-6">
-                <el-select
-                  multiple
-                  class="select-info"
-                  size="large"
-                  v-model="selects.multiple"
-                  collapse-tags
-                  placeholder="Multiple Select"
-                >
-                  <el-option
-                    v-for="option in selects.countries"
-                    class="select-info"
-                    :value="option.value"
-                    :label="option.label"
-                    :key="option.label"
-                  >
-                  </el-option>
-                </el-select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <h4 class="card-title">Tags</h4>
-
-            <tags-input v-model="tags.dynamicTags"></tags-input>
-          </div>
-          <div class="col-md-6">
-            <h4 class="card-title">Dropdown &amp; Dropup</h4>
-
-            <div class="row">
-              <div class="col-xl-4 col-md-6">
-                <base-dropdown
-                  title-classes="dropdown-toggle btn btn-primary btn-block"
-                  title="Dropdown"
-                >
-                  <h6 class="dropdown-header">Dropdown header</h6>
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </base-dropdown>
-              </div>
-
-              <div class="col-xl-4 col-md-6">
-                <base-dropdown
-                  direction="up"
-                  title="Dropup"
-                  title-classes="dropdown-toggle btn btn-primary btn-block"
-                >
-                  <h6 class="dropdown-header">Dropdown header</h6>
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </base-dropdown>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <h4 class="card-title">Progress Bars</h4>
-            <base-progress label="Default" value-position="right" :value="25" />
-            <base-progress
-              label="Primary"
-              :value="60"
-              value-position="right"
-              type="primary"
-            />
-          </div>
-          <div class="col-md-6">
-            <h4 class="card-title">Sliders</h4>
-            <slider v-model="sliders.simple"> </slider> <br />
-            <slider
-              v-model="sliders.rangeSlider"
-              type="primary"
-              :connect="true"
-            >
-            </slider>
-            <br />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-sm-4">
-            <h4 class="card-title">Regular Image</h4>
-            <image-upload @change="onImageChange" select-text="Select Image" />
-          </div>
-          <div class="col-md-4 col-sm-4">
-            <h4 class="card-title">Avatar</h4>
-            <image-upload
-              type="avatar"
-              select-text="Add photo"
-              @change="onAvatarChange"
-            />
-          </div>
-        </div>
-      </div>
-    </card>
-    <!-- end card -->
-  </div>
-</template>
+    </div>
+    </template>
 <script>
-import { TimeSelect, DatePicker, Select, Option } from 'element-ui';
-import {
-  BaseProgress,
-  BaseSwitch,
-  Slider,
-  ImageUpload,
-  TagsInput
-} from 'src/components/index';
+import { Table, TableColumn, Select, Option } from 'element-ui';
+import { BasePagination } from 'src/components';
+import Fuse from 'fuse.js';
+import swal from 'sweetalert2';
+import { mapGetters } from "vuex";
 
 export default {
   components: {
-    [DatePicker.name]: DatePicker,
-    [TimeSelect.name]: TimeSelect,
-    [Option.name]: Option,
+    BasePagination,
     [Select.name]: Select,
-    BaseSwitch,
-    BaseProgress,
-    ImageUpload,
-    TagsInput,
-    Slider
+    [Option.name]: Option,
+    [Table.name]: Table,
+    [TableColumn.name]: TableColumn
+  },
+  computed: {
+    ...mapGetters(["getData"]),
+
+    /***
+     * Returns a page from the searched data or the whole data. Search is performed in the watch section below
+     */
+    queriedData() {
+      let result = this.tableData;
+      if (this.searchedData.length > 0) {
+        result = this.searchedData;
+      }
+      return result.slice(this.from, this.to);
+    },
+    to() {
+      let highBound = this.from + this.pagination.perPage;
+      if (this.total < highBound) {
+        highBound = this.total;
+      }
+      return highBound;
+    },
+    from() {
+      return this.pagination.perPage * (this.pagination.currentPage - 1);
+    },
+    total() {
+      return this.searchedData.length > 0
+        ? this.searchedData.length
+        : this.tableData.length;
+    }
   },
   data() {
     return {
-      enabledRadio: '2',
-      disabledRadio: '2',
-      images: {
-        regular: null,
-        avatar: null
+      predict : [],
+      lowerlabel:['name','xstatusCd','sumWinProb' ,'invstStgCd' ,'optyType' , 'marketClassCd',
+      'createMonth' , 'closeDt','bef1mSlngAmt','circuitNum','code','text','slngAmt' ,'purePrfit','minChDt' ,'maxChDt'],
+      tables:[],
+      pagination: {
+        perPage: 5,
+        currentPage: 1,
+        perPageOptions: [5, 10, 25, 50],
+        total: 0
       },
-      switches: {
-        defaultOn: true,
-        defaultOff: false,
-        plainOn: true,
-        plainOff: false,
-        withIconsOn: true,
-        withIconsOff: false
-      },
-      sliders: {
-        simple: 30,
-        rangeSlider: [20, 60]
-      },
-      selects: {
-        simple: '',
-        countries: [
-          { value: '1차산업', label: '1차산업' },
-          { value: 'IT서비스', label: 'IT서비스' },
-          { value: 'Other', label: 'Other' },
-          { value: 'VAN', label: 'VAN' },
-          { value: '가구/목재품', label: '가구/목재품' },
-        ],
-        multiple: 'ARS'
-      },
-      tags: {
-        dynamicTags: ['Tag 1', 'Tag 2', 'Tag 3']
-      },
-      datePicker: '',
-      dateTimePicker: '',
-      timePicker: ''
+      searchQuery: '',
+      propsToSearch: ['name', 'email', 'age'],
+      tableColumns: [
+        {
+          prop: 'name',
+          label: 'Name',
+          minWidth: 200
+        },
+        {
+          prop: 'sumWinProb',
+          label: 'SUM_WIN_PROB',
+          minWidth: 200
+        },
+        {
+          prop: 'invstStgCd',
+          label: 'INVST_STG_CD',
+          minWidth: 200
+        },
+        {
+          prop: 'optyType',
+          label: 'X_OPTY_TYPE',
+          minWidth: 200
+        },
+        {
+          prop: 'marketClassCd',
+          label: 'MARKET_CLASS_CD',
+          minWidth: 200
+        },
+        {
+          prop: 'createMonth',
+          label: 'CREATED',
+          minWidth: 200
+        },
+        {
+          prop: 'closeDt',
+          label: 'CLOSE_DT',
+          minWidth: 200
+        },
+        {
+          prop: 'bef1mSlngAmt',
+          label: 'BEF_1M_SLNG_AMT',
+          minWidth: 200
+        },
+        {
+          prop: 'circuitNum',
+          label: 'CIRCUIT_NUM',
+          minWidth: 200
+        },
+        {
+          prop: 'code',
+          label: 'X_CODE',
+          minWidth: 200
+        },
+        {
+          prop: 'text',
+          label: 'X_TEXT',
+          minWidth: 200
+        },
+        {
+          prop: 'slngAmt',
+          label: 'SLNG_AMT',
+          minWidth: 200
+        },
+        {
+          prop: 'purePrfit',
+          label: 'PURE_PRFIT_AMT',
+          minWidth: 200
+        },
+        {
+          prop: 'minChDt',
+          label: 'MIN_CH_DT',
+          minWidth: 200
+        },
+        {
+          prop: 'maxChDt',
+          label: 'MAX_CH_DT',
+          minWidth: 200
+        },
+      ],
+      tableData: [],
+      searchedData: [],
+      fuseSearch: null
     };
   },
   methods: {
-    onImageChange(file) {
-      this.images.regular = file;
+    checkData(){
+      console.log(this.predict);
     },
-    onAvatarChange(file) {
-      this.images.avatar = file;
+    predictData(){
+      console.log("perdict!!");
+      console.log(this.tables)
+      for(var i = 0; i<this.tables.length; i++){
+        const tmpdata = {
+          name : this.tables[i].name,
+          type : 'out',
+          bef1mSlngAmt :  this.tables[i].bef1mSlngAmt,
+          circuitNum :  this.tables[i].circuitNum,
+          createMonth :  this.tables[i].createMonth.substr(4,1) == '0'? this.tables[i].createMonth.substr(5,1) + '월':this.tables[i].createMonth.substr(4,2) + '월',
+          invstStgCd :  this.tables[i].invstStgCd == 'A'?'1':'0',
+          optyType :  this.tables[i].optyType == 'A'?'1':'0',
+          text :  this.tables[i].text,
+          marketClassCd : this.tables[i].marketClassCd
+        }
+        this.$store.dispatch("loadData", tmpdata);
+      }
+    },
+    handleFileUpload() {
+      this.files = this.$refs.files.files;
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.allData = e.target.result.split("\n");
+        this.allDataNum = this.allData.length - 1;
+
+        for(var i = 1;i<10;i++){
+          var obj = {};
+          obj['userId'] = '준형'
+          var row = this.allData[i].split(",");
+          for(let j = 0;j<this.lowerlabel.length;j++){
+            obj[this.lowerlabel[j]] = row[j];
+          }
+          this.tables.push(obj);
+        }
+        this.tableData = this.tables;
+      };
+      reader.readAsText(this.files[0],"euc-kr");
+    },
+  },
+  mounted() {
+    // Fuse search initialization.
+    this.fuseSearch = new Fuse(this.tableData, {
+      keys: ['name', 'email'],
+      threshold: 0.3
+    });
+  },
+  watch: {
+    /**
+     * Searches through the table data by a given query.
+     * NOTE: If you have a lot of data, it's recommended to do the search on the Server Side and only display the results here.
+     * @param value of the query
+     */
+    searchQuery(value) {
+      let result = this.tableData;
+      if (value !== '') {
+        result = this.fuseSearch.search(this.searchQuery);
+      }
+      this.searchedData = result;
+    },
+    getData(){
+      this.predict.push(this.getData)
     }
   }
 };
 </script>
 <style>
-.extended-forms .el-select {
-  width: 100%;
-  margin-bottom: 30px;
-}
-
-.extended-forms .progress {
-  margin-bottom: 30px;
+.pagination-select,
+.search-input {
+  width: 200px;
 }
 </style>

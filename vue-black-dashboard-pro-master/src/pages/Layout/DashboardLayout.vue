@@ -16,7 +16,7 @@
           }"
         >
         </sidebar-item>
-        <sidebar-item
+        <!-- <sidebar-item
           :link="{ name: $t('sidebar.pages'), icon: 'tim-icons icon-image-02' }"
         >
           <sidebar-item
@@ -40,8 +40,8 @@
           <sidebar-item
             :link="{ name: $t('sidebar.userProfile'), path: '/pages/user' }"
           ></sidebar-item>
-        </sidebar-item>
-        <sidebar-item
+        </sidebar-item> -->
+        <!-- <sidebar-item
           :link="{
             name: $t('sidebar.components'),
             icon: 'tim-icons icon-molecule-40'
@@ -91,7 +91,7 @@
               path: '/components/typography'
             }"
           ></sidebar-item>
-        </sidebar-item>
+        </sidebar-item> -->
         <sidebar-item
           :link="{ name: $t('sidebar.forms'), icon: 'tim-icons icon-notes' }"
         >
@@ -100,19 +100,19 @@
           ></sidebar-item>
           <sidebar-item
             :link="{
-              name: $t('sidebar.extendedForms'),
-              path: '/forms/extended'
-            }"
-          ></sidebar-item>
-          <sidebar-item
-            :link="{
               name: $t('sidebar.validationForms'),
               path: '/forms/validation'
             }"
           ></sidebar-item>
           <sidebar-item
-            :link="{ name: $t('sidebar.wizard'), path: '/forms/wizard' }"
+            :link="{
+              name: $t('sidebar.extendedForms'),
+              path: '/forms/extended'
+            }"
           ></sidebar-item>
+          <!-- <sidebar-item
+            :link="{ name: $t('sidebar.wizard'), path: '/forms/wizard' }"
+          ></sidebar-item> -->
         </sidebar-item>
         <sidebar-item
           :link="{
@@ -120,7 +120,7 @@
             icon: 'tim-icons icon-puzzle-10'
           }"
         >
-          <sidebar-item
+          <!-- <sidebar-item
             :link="{
               name: $t('sidebar.regularTables'),
               path: '/table-list/regular'
@@ -131,15 +131,15 @@
               name: $t('sidebar.extendedTables'),
               path: '/table-list/extended'
             }"
-          ></sidebar-item>
+          ></sidebar-item> -->
           <sidebar-item
             :link="{
-              name: $t('sidebar.paginatedTables'),
+              name: $t('getTable'),
               path: '/table-list/paginated'
             }"
           ></sidebar-item>
         </sidebar-item>
-        <sidebar-item
+        <!-- <sidebar-item
           :link="{ name: $t('sidebar.maps'), icon: 'tim-icons icon-pin' }"
         >
           <sidebar-item
@@ -154,8 +154,8 @@
           <sidebar-item
             :link="{ name: $t('sidebar.vectorMaps'), path: '/maps/vector-map' }"
           ></sidebar-item>
-        </sidebar-item>
-        <sidebar-item
+        </sidebar-item> -->
+        <!-- <sidebar-item
           :link="{
             name: $t('sidebar.widgets'),
             icon: 'tim-icons icon-settings',
@@ -175,7 +175,7 @@
             icon: 'tim-icons icon-time-alarm',
             path: '/calendar'
           }"
-        ></sidebar-item>
+        ></sidebar-item> -->
       </template>
     </side-bar>
     <div class="main-panel" :data="sidebarBackground">

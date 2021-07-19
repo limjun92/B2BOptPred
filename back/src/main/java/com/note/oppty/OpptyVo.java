@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class OpptyVo {
 	private String name;
+	private String type;
 	private String opptyResultNo;
 	private String opptyResult;
 	private String usersId;
@@ -28,10 +29,11 @@ public class OpptyVo {
 		System.out.println("opptyVo");
 	}
 
-	public OpptyVo(String name, String bef1mSlngAmt, String circuitNum, String invstStgCd, String optyType, String text,
+	public OpptyVo(String name, String type, String bef1mSlngAmt, String circuitNum, String invstStgCd, String optyType, String text,
 			String marketClassCd, String createMonth) {
 		super();
 		this.name = name;
+		this.type = type;
 		this.bef1mSlngAmt = bef1mSlngAmt;
 		this.circuitNum = circuitNum;
 		this.invstStgCd = invstStgCd;
@@ -41,10 +43,11 @@ public class OpptyVo {
 		this.createMonth = createMonth;
 	}
 
-	public OpptyVo(String name, String opptyResult, String usersId, String newOrOld, String bef1mSlngAmt, String circuitNum, String invstStgCd,
+	public OpptyVo(String name, String type, String opptyResult, String usersId, String newOrOld, String bef1mSlngAmt, String circuitNum, String invstStgCd,
 			String optyType, String text, String marketClassCd, String createMonth) {
 		super();
 		this.name = name;
+		this.type = type; 
 		this.opptyResult = opptyResult;
 		this.usersId = usersId;
 		this.newOrOld = newOrOld;

@@ -1,16 +1,19 @@
 <template>
   <div class="content">
-    <input type="file" id="files" ref="files" v-on:change="handleFileUpload()" multiple />
+    <!-- <input type="file" id="files" ref="files" v-on:change="handleFileUpload()" multiple /> -->
     <div class="col-md-8 ml-auto mr-auto">
-      <h2 class="text-center">Paginated Tables</h2>
+      
+      <h2 class="text-center">Get Tables</h2>
       <p class="text-center">
-        With a selection of custom components & and Element UI components, you
+        
+        <!-- With a selection of custom components & and Element UI components, you
         can built beautiful data tables. For more info check
         <a
           href="http://element.eleme.io/#/en-US/component/table"
           target="_blank"
           >Element UI Table</a
-        >
+        > -->
+        <input type="file" id="files" ref="files" v-on:change="handleFileUpload()" multiple />
       </p>
     </div>
     <div class="row mt-5">

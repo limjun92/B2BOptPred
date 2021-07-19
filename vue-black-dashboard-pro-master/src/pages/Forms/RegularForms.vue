@@ -8,7 +8,7 @@
         <div>
           <form method="get" action="/" class="form-horizontal">
             <div class="row">
-              <label class="col-sm-2 col-form-label">영업정보ID</label>
+              <label class="col-sm-2 col-form-label">최근 매출액</label>
               <div class="col-sm-10">
                 <base-input v-model="datas.bef1mSlngAmt" placeholder="예측할 정보의 영업정보ID 입력 ex) 1-2435574975">
                   <span slot="helpBlock" class="form-text"
@@ -19,7 +19,7 @@
             </div>
 
             <div class="row">
-              <label class="col-sm-2 col-form-label">영업정보ID</label>
+              <label class="col-sm-2 col-form-label">회선 수</label>
               <div class="col-sm-10">
                 <base-input v-model="datas.circuitNum" placeholder="예측할 정보의 영업정보ID 입력 ex) 1-2435574975">
                   <span slot="helpBlock" class="form-text"
@@ -236,6 +236,7 @@ export default {
       getresult : 0,
       datas: {
         name:'',
+        type:'regular',
         bef1mSlngAmt: '',
         circuitNum: '',
         createMonth: '',

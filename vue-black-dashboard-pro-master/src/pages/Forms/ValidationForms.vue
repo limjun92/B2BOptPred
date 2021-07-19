@@ -309,6 +309,7 @@ export default {
     sendData(){
       const tmpdata = {
           name : this.one.name,
+          type : 'inTable',
           bef1mSlngAmt :  this.one.bef1mSlngAmt,
           circuitNum :  this.one.circuitNum,
           createMonth :  this.one.createMonth.substr(4,1) == '0'? this.one.createMonth.substr(5,1) + '월':this.one.createMonth.substr(4,2) + '월',
