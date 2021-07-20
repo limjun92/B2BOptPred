@@ -129,8 +129,9 @@
             </base-pagination>
           </div>
         </card>
-        <div v-on:click = 'predictData'>예측</div>
-        {{getData}}
+        <!-- <div v-on:click = 'predictData'>예측</div> -->
+        <base-button type="success" class="animation-on-hover" v-on:click = "predictData">예측</base-button>
+        <!-- {{getData}} -->
       </div>
     </div>
     </div>
