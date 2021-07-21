@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.note.oppty.OpptyMapper">
+	
+	<select id="selectOpptyList" resultType="Oppty">
+		select * 
+		from oppty_result
+		order by join_date desc
+	</select>
+	
+	<insert id="getData" parameterType="Oppty">
+        insert into oppty_result (name, type, opptyResult,usersId,newOrOld,bef1mSlngAmt,circuitNum,invstStgCd,optyType,text,marketClassCd,createMonth)
+        values (#{name}, #{type}, #{opptyResult}, #{usersId}, #{newOrOld},#{bef1mSlngAmt}, #{circuitNum},#{invstStgCd}, #{optyType}, #{text}, #{marketClassCd}, #{createMonth})
+     </insert>
+     
+
+	
+</mapper>
